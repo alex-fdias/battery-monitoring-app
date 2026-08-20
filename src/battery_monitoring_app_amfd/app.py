@@ -445,22 +445,23 @@ class BatMonUI(QMainWindow):
 
         layout.addWidget(self.graphWidget)
 
-        self.button_list_ports = QPushButton("Refresh port list")
+        labelSerialPortTxt = QLabel()
+        labelSerialPortTxt.setStyleSheet('font-weight: bold')
+        labelSerialPortTxt.setText('Port:')
+        labelSerialPortTxt.setAlignment(Qt.AlignmentFlag.AlignLeft)
+
         self.port_list = QComboBox()
         self.port_list.setSizePolicy(
             QSizePolicy.Policy.Expanding,
             QSizePolicy.Policy.Fixed
         )
 
-        labelSerialPortTxt = QLabel()
-        labelSerialPortTxt.setStyleSheet('font-weight: bold')
-        labelSerialPortTxt.setText('Port:')
-        labelSerialPortTxt.setAlignment(Qt.AlignmentFlag.AlignLeft)
-        self.button_list_ports.pressed.connect(self.list_com_ports)
-        self.list_com_ports()
         layout_serial_port = QHBoxLayout()
         layout_serial_port.addWidget(labelSerialPortTxt)
         layout_serial_port.addWidget(self.port_list)
+
+        self.button_list_ports = QPushButton("Refresh port list")
+        self.button_list_ports.pressed.connect(self.list_com_ports)
 
         self.button_reading = QPushButton("Start reading")
         self.button_reading.pressed.connect(self.start_reading)
@@ -534,7 +535,15 @@ class BatMonUI(QMainWindow):
         self.setCentralWidget(w)
 
         self.setWindowTitle('Battery Monitoring Application')
+        self.list_com_ports()
+
         self.show()
+
+        self.port_list.setMinimumWidth(self.port_list.width())
+        self.port_list.setSizePolicy(
+            QSizePolicy.Policy.Fixed,
+            QSizePolicy.Policy.Fixed
+        )
 
     def list_com_ports(self):
         self.ports = [port.device for port in list_ports.comports()]
