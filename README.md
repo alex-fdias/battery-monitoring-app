@@ -35,3 +35,6 @@ Select a serial port in the drop-down list to read from. Press the 'Refresh port
 Start and stop reading data from the chosen serial port by pressing the 'Start reading' (then 'Stop reading') button. Data stored and shown is reset when data reading is restarted.
 
 The plots are drawn and statistics are calculated automatically for the data read so far.
+
+![GUI screenshot -- discharge](GUI_2_discharge.png "GUI screenshot – discharge")
+![GUI screenshot -- discharge (detail)](GUI_2_discharge_detail.png "GUI screenshot – discharge (detail)")
